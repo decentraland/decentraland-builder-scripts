@@ -3,7 +3,7 @@ declare interface IScript<T extends {}> {
   spawn(host: any, props: T, channel: IChannel): void
 }
 
-type BaseAction<T> = {
+type BaseAction<T extends {}> = {
   entityName: string
   actionId: string
   values: T
@@ -23,6 +23,7 @@ type Bus = {
 declare interface IChannel {
   id: string
   bus: Bus
+  createAction<T extends {}>(actionId: string, values: T): BaseAction<T>
   sendActions(actions?: Actions): void
   handleAction<T extends {}>(
     actionId: string,

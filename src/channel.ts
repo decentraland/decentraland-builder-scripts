@@ -68,6 +68,14 @@ export function createChannel(id: string, host: any, bus: Bus): IChannel {
   return {
     id,
     bus,
+    createAction<T extends {}>(actionId: string, values: T) {
+      const action: BaseAction<T> = {
+        entityName: host.name,
+        actionId,
+        values
+      }
+      return action
+    },
     sendActions(actions: Actions = []) {
       for (const base of actions) {
         const action: Action<any> = { ...base, sender: id }
