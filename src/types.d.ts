@@ -27,7 +27,7 @@ declare interface IChannel {
   sendActions(actions?: Actions): void
   handleAction<T extends {}>(
     actionId: string,
-    handler: (values: T) => void
+    handler: (action: Action<T>) => void
   ): void
   request<T>(key: string, callback: (value: T) => void): void
   reply<T>(key: string, callback: () => T): void
