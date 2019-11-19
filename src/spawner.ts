@@ -1,13 +1,15 @@
 /// <reference path="./types.d.ts" />
 
 import { createChannel } from './channel'
+import { createInventory } from './inventory'
 
 const bus = new MessageBus()
 
 export class Spawner<T extends {}> {
   private script: IScript<T>
   constructor(script: IScript<T>) {
-    script.init()
+    const inventory = createInventory(UICanvas, UIContainerStack, UIImage)
+    script.init({ inventory })
     this.script = script
   }
   spawn(

@@ -1,5 +1,5 @@
 declare interface IScript<T extends {}> {
-  init(): void
+  init(args: { inventory: IInventory }): void
   spawn(host: any, props: T, channel: IChannel): void
 }
 
@@ -31,4 +31,10 @@ declare interface IChannel {
   ): void
   request<T>(key: string, callback: (value: T) => void): void
   reply<T>(key: string, callback: () => T): void
+}
+
+declare interface IInventory {
+  add(id: string, texture: any): void
+  has(id: string): boolean
+  remove(id: string): void
 }
